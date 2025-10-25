@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { authService } from '../../infrastructure/auth/AuthService';
 import { useAuthStore } from '../../core/store/authStore';
 
@@ -26,23 +26,52 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <main>
-      <h2>Login</h2>
-      <form onSubmit={submit}>
-        <div>
-          <label>Email</label>
-          <input value={email} onChange={e => setEmail(e.target.value)} type="email" />
-        </div>
-        <div>
-          <label>Password</label>
-          <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
-        </div>
-        {error && <div>{error}</div>}
-        <div>
-          <button type="submit" disabled={loading}>{loading ? 'Logging in…' : 'Login'}</button>
-        </div>
-      </form>
-    </main>
+    <div className="auth-container">
+      <div className="auth-form">
+        <h2>Welcome Back</h2>
+        <form onSubmit={submit}>
+          <div className="form-group">
+            <label htmlFor="email">Email address</label>
+            <input
+              id="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              type="email"
+              required
+              placeholder="Enter your email"
+              autoComplete="email"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              type="password"
+              required
+              placeholder="Enter your password"
+              autoComplete="current-password"
+            />
+          </div>
+          {error && <div className="auth-message auth-error">{error}</div>}
+          <button type="submit" disabled={loading}>
+            {loading ? (
+              <>
+                <span className="loading-spinner"></span>
+                Logging in...
+              </>
+            ) : (
+              'Sign In'
+            )}
+          </button>
+          <div className="auth-form-footer">
+            Don't have an account?
+            <Link to="/register">Sign up</Link>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 
