@@ -69,8 +69,8 @@ const HomePage: React.FC = () => {
   }, [hasMore, loading]);
 
   return (
-  <main>
-  <div>
+    <div className="country-grid">
+      <div className="search-bar">
         <input
           type="text"
           placeholder="Search countries..."
@@ -98,21 +98,21 @@ const HomePage: React.FC = () => {
       {loading && (
         <p>Loading countries…</p>
       )}
-      {error && <p>Error: {error}</p>}
+      {error && <p className="error">Error: {error}</p>}
       {!loading && !error && (
-        <div>
+        <div className="grid">
           {countries.map((c: Country) => (
             <CountryCard key={c.cca3 ?? c.name} country={c} />
           ))}
         </div>
       )}
       {!loading && hasMore && (
-        <div>Loading more…</div>
+        <div className="loading">Loading more…</div>
       )}
       {!loading && !hasMore && countries.length > 0 && (
-        <div>End of results</div>
+        <div className="end-message">End of results</div>
       )}
-    </main>
+    </div>
   );
 };
 
