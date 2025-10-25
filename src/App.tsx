@@ -1,33 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router'
 import Header from './ui/components/Header'
 import HomePage from './ui/pages/HomePage'
 import LoginPage from './ui/pages/LoginPage'
 import RegisterPage from './ui/pages/RegisterPage'
-
-const getRoute = () => {
-  const hash = window.location.hash.replace('#', '') || '/'
-  return hash
-}
+import CountryDetailsPage from './ui/pages/CountryDetailsPage'
+import ProtectedRoute from './ui/components/ProtectedRoute'
+import PublicRoute from './ui/components/PublicRoute'
 
 function App() {
-  const [route, setRoute] = useState(getRoute())
-
-  useEffect(() => {
-    const onHash = () => setRoute(getRoute())
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [])
-
-  let Page = <HomePage />
-  if (route === '/login') Page = <LoginPage />
-  else if (route === '/register') Page = <RegisterPage />
-
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      {Page}
-    </>
+      <Routes>
+  <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+  <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/country/:code"
+          element={
+            <ProtectedRoute>
+              <CountryDetailsPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 import { authService } from '../../infrastructure/auth/AuthService'
 
 const RegisterPage: React.FC = () => {
@@ -8,17 +9,19 @@ const RegisterPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
 
+  const navigate = useNavigate();
   const submit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-    setSuccess(null)
-    const res = await authService.register(email, password)
-    setLoading(false)
-    if (!res.ok) setError(res.message ?? 'Register failed')
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+    const res = await authService.register(email, password);
+    setLoading(false);
+    if (!res.ok) setError(res.message ?? 'Register failed');
     else {
-      setSuccess('Registered — you are now logged in')
-      setTimeout(() => (window.location.hash = '#/'), 800)
+      setSuccess('Registered — you are now logged in');
+      // Token is set in cookie by AuthService
+      setTimeout(() => navigate('/'), 800);
     }
   }
 
