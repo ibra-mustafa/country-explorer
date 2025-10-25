@@ -1,10 +1,9 @@
 # Country Explorer
 
-A modern web application for exploring countries around the world, featuring both grid and 3D globe visualizations, built with React and TypeScript.
+A modern web application for exploring countries around the world with a responsive and intuitive interface, built with React and TypeScript.
 
 ## Features
 
-- 🌍 Interactive 3D globe visualization
 - 📱 Responsive grid layout
 - 🔍 Real-time search and filtering
 - 🌓 Dark/light theme support
@@ -20,8 +19,6 @@ A modern web application for exploring countries around the world, featuring bot
 - **Vite** - Build tool and development server
 - **React Router** - Client-side routing
 - **Zustand** - State management
-- **react-globe.gl** - 3D globe visualization
-- **Three.js** - 3D rendering engine
 
 ### Architecture
 - Clean Architecture principles
@@ -120,9 +117,9 @@ The styling approach focuses on:
 
 Several optimizations are implemented:
 - Infinite scroll for large datasets
-- Lazy loading of globe visualization
 - Optimized re-renders using React hooks
 - Efficient state updates with Zustand
+- Responsive image loading
 
 ### Security
 
@@ -140,13 +137,7 @@ Security measures include:
 - Filter by region
 - Infinite scroll pagination
 - Smooth loading states
-
-### 3D Globe View
-- Interactive 3D globe visualization
-- Country markers sized by population
 - Click navigation to country details
-- Auto-rotation for better UX
-- Smooth camera transitions
 
 ### Authentication
 - JWT-based authentication
