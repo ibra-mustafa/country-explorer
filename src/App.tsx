@@ -1,5 +1,3 @@
-import React from 'react'
-import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import Header from './ui/components/Header'
 import HomePage from './ui/pages/HomePage'

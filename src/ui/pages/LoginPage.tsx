@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { authService } from '../../infrastructure/auth/AuthService'
+import { authService } from '../../infrastructure/auth/AuthService';
+import { useAuthStore } from '../../core/store/authStore';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -9,6 +10,7 @@ const LoginPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
 
   const navigate = useNavigate();
+  const setToken = useAuthStore(state => state.setToken);
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -18,29 +20,30 @@ const LoginPage: React.FC = () => {
     if (!res.ok) setError(res.message ?? 'Login failed');
     else {
       // Token is set in cookie by AuthService
+      setToken(document.cookie.split('; ').find(row => row.startsWith('jwt='))?.split('=')[1] || '');
       navigate('/');
     }
   }
 
   return (
-    <main style={{maxWidth: 420, margin: '2rem auto', padding: '0 1rem'}}>
+    <main>
       <h2>Login</h2>
       <form onSubmit={submit}>
-        <div style={{marginBottom: 8}}>
+        <div>
           <label>Email</label>
-          <input value={email} onChange={e => setEmail(e.target.value)} type="email" style={{width: '100%'}} />
+          <input value={email} onChange={e => setEmail(e.target.value)} type="email" />
         </div>
-        <div style={{marginBottom: 8}}>
+        <div>
           <label>Password</label>
-          <input value={password} onChange={e => setPassword(e.target.value)} type="password" style={{width: '100%'}} />
+          <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
         </div>
-        {error && <div style={{color: 'red'}}>{error}</div>}
-        <div style={{marginTop: 12}}>
+        {error && <div>{error}</div>}
+        <div>
           <button type="submit" disabled={loading}>{loading ? 'Logging in…' : 'Login'}</button>
         </div>
       </form>
     </main>
-  )
+  );
 }
 
 export default LoginPage

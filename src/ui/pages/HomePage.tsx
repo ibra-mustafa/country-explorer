@@ -69,10 +69,9 @@ const HomePage: React.FC = () => {
   }, [hasMore, loading]);
 
   return (
-    <main className="max-w-[1000px] mx-auto px-4 py-6">
-      <div className="flex flex-col sm:flex-row gap-4 mb-6">
+  <main>
+  <div>
         <input
-          className="border rounded px-3 py-2 w-full sm:w-1/2"
           type="text"
           placeholder="Search countries..."
           value={search}
@@ -82,7 +81,6 @@ const HomePage: React.FC = () => {
           }}
         />
         <select
-          className="border rounded px-3 py-2 w-full sm:w-1/4"
           value={region}
           onChange={(e) => {
             setRegion(e.target.value);
@@ -98,25 +96,21 @@ const HomePage: React.FC = () => {
         </select>
       </div>
       {loading && (
-        <p className="text-sm text-gray-600 dark:text-gray-300">
-          Loading countries…
-        </p>
+        <p>Loading countries…</p>
       )}
-      {error && <p className="text-sm text-red-500">Error: {error}</p>}
+      {error && <p>Error: {error}</p>}
       {!loading && !error && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div>
           {countries.map((c: Country) => (
             <CountryCard key={c.cca3 ?? c.name} country={c} />
           ))}
         </div>
       )}
       {!loading && hasMore && (
-        <div className="text-center py-6 text-gray-500">Loading more…</div>
+        <div>Loading more…</div>
       )}
       {!loading && !hasMore && countries.length > 0 && (
-        <div className="text-center py-6 text-gray-400 text-xs">
-          End of results
-        </div>
+        <div>End of results</div>
       )}
     </main>
   );

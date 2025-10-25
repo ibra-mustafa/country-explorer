@@ -66,30 +66,29 @@ const CountryDetailsPage: React.FC = () => {
     };
   }, [code]);
 
-  if (loading) return <main className="max-w-[1000px] mx-auto px-4 py-6">Loading country…</main>;
-  if (error) return <main className="max-w-[1000px] mx-auto px-4 py-6 text-red-500">{error}</main>;
+  if (loading) return <main>Loading country…</main>;
+  if (error) return <main>{error}</main>;
   if (!country) return null;
 
   return (
-    <main className="max-w-[1000px] mx-auto px-4 py-6">
-      <div className="flex flex-col md:flex-row gap-8 items-start">
-        <img src={country.flag} alt={`${country.name} flag`} className="w-64 h-40 object-cover rounded border" />
+    <main>
+      <div>
+        <img src={country.flag} alt={`${country.name} flag`} />
         <div>
-          <h2 className="text-2xl font-bold mb-2">{country.name}</h2>
-          <div className="mb-2">Region: <span className="font-medium">{country.region}</span></div>
-          <div className="mb-2">Population: <span className="font-medium">{country.population.toLocaleString()}</span></div>
-          <div className="mb-2">Code: <span className="font-mono">{country.cca3}</span></div>
+          <h2>{country.name}</h2>
+          <div>Region: <span>{country.region}</span></div>
+          <div>Population: <span>{country.population.toLocaleString()}</span></div>
+          <div>Code: <span>{country.cca3}</span></div>
           {borderCountries.length > 0 && (
-            <div className="mt-4">
-              <div className="font-semibold mb-2">Bordering Countries:</div>
-              <div className="flex flex-wrap gap-2">
+            <div>
+              <div>Bordering Countries:</div>
+              <div>
                 {borderCountries.map((b) => (
                   <Link
                     key={b.cca3}
                     to={`/country/${b.cca3}`}
-                    className="px-3 py-1 rounded border bg-gray-100 dark:bg-gray-800 text-sm hover:bg-indigo-100 dark:hover:bg-indigo-900"
                   >
-                    <span className="font-mono mr-1">{b.cca3}</span> {b.name}
+                    <span>{b.cca3}</span> {b.name}
                   </Link>
                 ))}
               </div>
@@ -97,8 +96,8 @@ const CountryDetailsPage: React.FC = () => {
           )}
         </div>
       </div>
-      <div className="mt-8">
-        <button className="px-4 py-2 rounded bg-indigo-600 text-white" onClick={() => navigate('/')}>Back to Dashboard</button>
+      <div>
+        <button onClick={() => navigate('/')}>Back to Dashboard</button>
       </div>
     </main>
   );
