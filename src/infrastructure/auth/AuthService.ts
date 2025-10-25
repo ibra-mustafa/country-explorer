@@ -1,22 +1,5 @@
-type UserRecord = { email: string; password: string }
-
-const USERS_KEY = 'ce_users'
 
 export class AuthService {
-  // Very small in-memory/localStorage-backed fake auth for demo/testing.
-  private loadUsers(): UserRecord[] {
-    try {
-      const raw = localStorage.getItem(USERS_KEY)
-      return raw ? JSON.parse(raw) : []
-    } catch {
-      return []
-    }
-  }
-
-  private saveUsers(users: UserRecord[]) {
-    localStorage.setItem(USERS_KEY, JSON.stringify(users))
-  }
-
   private base = 'https://reqres.in/api';
   private apiKey = 'reqres-free-v1';
 
