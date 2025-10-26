@@ -1,0 +1,39 @@
+.favoriteButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.favoriteButton svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.favoriteButton:hover {
+  transform: scale(1.1);
+  color: var(--primary);
+}
+
+.favoriteButton.active {
+  color: var(--primary);
+  background-color: var(--hover-bg);
+}
+
+.favoriteButton.active svg {
+  transform: scale(1.1);
+}
