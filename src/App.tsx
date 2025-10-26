@@ -3,6 +3,7 @@ import HomePage from './ui/pages/HomePage'
 import LoginPage from './ui/pages/LoginPage'
 import RegisterPage from './ui/pages/RegisterPage'
 import CountryDetailsPage from './ui/pages/CountryDetailsPage'
+import NotFoundPage from './ui/pages/NotFoundPage'
 import ProtectedRoute from './ui/components/ProtectedRoute'
 import PublicRoute from './ui/components/PublicRoute'
 import { BrowserRouter, Route, Routes } from 'react-router'
@@ -14,25 +15,27 @@ function App() {
         <Header />
         <main className="container">
           <Routes>
-  <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
-  <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <HomePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/country/:code"
-          element={
-            <ProtectedRoute>
-              <CountryDetailsPage />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+            <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+            <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/country/:code"
+              element={
+                <ProtectedRoute>
+                  <CountryDetailsPage />
+                </ProtectedRoute>
+              }
+            />
+            {/* Catch-all route for 404 */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </main> 
       </div>
     </BrowserRouter>
